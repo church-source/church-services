@@ -1,9 +1,9 @@
 
 # church-people
 **Build Status:**
-[![Build Status](https://travis-ci.com/church-source/church-people.svg?branch=master)](https://travis-ci.com/church-source/church-people)
+[![Build Status](https://travis-ci.com/church-source/church-services.svg?branch=master)](https://travis-ci.com/church-source/church-services)
 **Code Coverage Status:**
-[![codecov](https://codecov.io/gh/church-source/church-people/branch/master/graph/badge.svg)](https://codecov.io/gh/church-source/church-people)
+[![codecov](https://codecov.io/gh/church-source/church-services/branch/master/graph/badge.svg)](https://codecov.io/gh/church-source/church-services)
 
 A church people API
 
