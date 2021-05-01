@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="./src/main/resources/liquibase/updates/songitems.xml">
+
+    <changeSet id="20210427-2240" author="rowanpi">
+        <createTable tableName="SongItem">
+          <column name="id" type="BIGINT(20)" autoIncrement="true">
+            <constraints primaryKey="true" />
+          </column>
+          <column name="deleted" type="TINYINT(1)" defaultValue="0">
+            <constraints nullable="false" />
+          </column>
+          <column name="created" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP"/>
+          <column name="modified" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP"/>
+          <column name="service" type="BIGINT(20)">
+              <constraints nullable="false" foreignKeyName="fk_ServiceForSong"
+                 references="Service(id)"  deleteCascade="true"/>
+          </column>
+          <column name="songCode" type="varchar(100)">
+            <constraints nullable="false" />
+          </column>
+          <column name="songOrder" type="INT(10)" defaultValue="0">
+                <constraints nullable="false" />
+          </column>
+        </createTable>
+        <sql dbms="mysql">
+            ALTER TABLE SongItem CHANGE modified modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+        </sql>
+        <addDefaultValue tableName="SongItem" columnName="deleted" defaultValueBoolean="false"/>
+    </changeSet>
+</databaseChangeLog>
