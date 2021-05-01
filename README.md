@@ -5,7 +5,7 @@
 **Code Coverage Status:**
 [![codecov](https://codecov.io/gh/church-source/church-services/branch/master/graph/badge.svg)](https://codecov.io/gh/church-source/church-services)
 
-A church people API
+A church services API
 
 ### Local Dev Environment
 To build: `gradlew build`
