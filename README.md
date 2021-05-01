@@ -1,5 +1,5 @@
 
-# church-people
+# church-services
 **Build Status:**
 [![Build Status](https://travis-ci.com/church-source/church-services.svg?branch=master)](https://travis-ci.com/church-source/church-services)
 **Code Coverage Status:**
