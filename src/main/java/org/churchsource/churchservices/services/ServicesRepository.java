@@ -1,10 +1,12 @@
 package org.churchsource.churchservices.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 
+import org.churchsource.churchservices.model.type.ServiceType;
 import org.churchsource.churchservices.repository.AbstractRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,23 @@ public class ServicesRepository extends AbstractRepository<ChurchService> {
         .setParameter("includeDeleted", false)
         .getResultList();
   }
+
+  public List<ChurchService> findEntityByDateAndType(LocalDate date, ServiceType type) {
+    return entityManager.createNamedQuery(ServiceNamedQueryConstants.NAME_GET_SERVICES_BY_DATE_AND_TYPE, ChurchService.class)
+            .setParameter("date", date)
+            .setParameter("type", type)
+            .setParameter("includeDeleted", false)
+            .getResultList();
+  }
+
+  public List<ChurchService> findEntityBetweenDates(LocalDate startDate, LocalDate endDate) {
+    return entityManager.createNamedQuery(ServiceNamedQueryConstants.NAME_GET_SERVICES_BETWEEN_DATES, ChurchService.class)
+            .setParameter("startDate", startDate)
+            .setParameter("endDate", endDate)
+            .setParameter("includeDeleted", false)
+            .getResultList();
+  }
+
 
   public ChurchService findServiceById(Long id) throws NoResultException {
     return entityManager.createNamedQuery(ServiceNamedQueryConstants.NAME_FIND_SERVICE_BY_ID, ChurchService.class)

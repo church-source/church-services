@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +24,7 @@ public class ServiceFullViewModel extends BaseViewModel<Long> implements Seriali
   private static final long serialVersionUID = -3479479691039681608L;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-  private Date serviceDate;
+  private LocalDate serviceDate;
 
   @Enumerated(EnumType.STRING)
   private ServiceType serviceType;
@@ -33,7 +33,7 @@ public class ServiceFullViewModel extends BaseViewModel<Long> implements Seriali
   private Set<SongItemFullViewModel> songItems = new HashSet<SongItemFullViewModel>();
 
   @Builder(builderMethodName = "aServiceFullViewModel")
-  public ServiceFullViewModel(Long id, Date serviceDate, ServiceType serviceType, Set<SongItemFullViewModel> songItems) {
+  public ServiceFullViewModel(Long id, LocalDate serviceDate, ServiceType serviceType, Set<SongItemFullViewModel> songItems) {
     super(id);
     this.serviceDate = serviceDate;
     this.serviceType = serviceType;

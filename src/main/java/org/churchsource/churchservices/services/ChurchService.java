@@ -3,6 +3,7 @@ package org.churchsource.churchservices.services;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 
 import javax.persistence.*;
@@ -20,7 +21,11 @@ import org.churchsource.churchservices.model.type.ServiceType;
     @NamedQuery(name = ServiceNamedQueryConstants.NAME_GET_ALL_SERVICES,
         query = ServiceNamedQueryConstants.QUERY_GET_ALL_SERVICES),
     @NamedQuery(name = ServiceNamedQueryConstants.NAME_FIND_SERVICE_BY_ID,
-        query = ServiceNamedQueryConstants.QUERY_FIND_SERVICE_BY_ID)
+        query = ServiceNamedQueryConstants.QUERY_FIND_SERVICE_BY_ID),
+    @NamedQuery(name = ServiceNamedQueryConstants.NAME_GET_SERVICES_BY_DATE_AND_TYPE,
+        query = ServiceNamedQueryConstants.QUERY_GET_SERVICES_BY_DATE_AND_TYPE),
+    @NamedQuery(name = ServiceNamedQueryConstants.NAME_GET_SERVICES_BETWEEN_DATES,
+        query = ServiceNamedQueryConstants.QUERY_GET_SERVICES_BETWEEN_DATES),
 })
 
 @Getter
@@ -34,7 +39,7 @@ public class ChurchService extends ChurchServiceEntity<Long> implements Serializ
 
   private static final long serialVersionUID = -3479479691039681608L;
 
-  private Date serviceDate;
+  private LocalDate serviceDate;
 
   @Enumerated(EnumType.STRING)
   private ServiceType serviceType;
@@ -44,7 +49,7 @@ public class ChurchService extends ChurchServiceEntity<Long> implements Serializ
   private Set<SongItem> songItems = new HashSet<SongItem>();
 
   @Builder(builderMethodName = "aService")
-  public ChurchService(Long id, Date created, Date modified, Boolean deleted, Date serviceDate,
+  public ChurchService(Long id, Date created, Date modified, Boolean deleted, LocalDate serviceDate,
                        ServiceType serviceType, Set<SongItem> songItems) {
     super(id, created, modified, deleted);
     this.serviceDate = serviceDate;

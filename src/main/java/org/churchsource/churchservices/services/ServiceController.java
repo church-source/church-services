@@ -1,10 +1,15 @@
 package org.churchsource.churchservices.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.churchsource.churchservices.model.type.ServiceType;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Date;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +36,6 @@ public class ServiceController {
   @PreAuthorize("hasAuthority('ViewService')")
   public ServiceFullViewModel getService(@PathVariable Long id) {
     ChurchService foundChurchService = servicesRepository.findEntityById(id);
-    System.out.println("FoundChurchService" + foundChurchService);
     if(foundChurchService != null) {
       return serviceFactory.createServiceFullViewModelFromEntity(foundChurchService);
     } else {
@@ -40,6 +44,35 @@ public class ServiceController {
   }
 
   @GetMapping
+  @PreAuthorize("hasAuthority('ViewService')")
+  public List<ServiceFullViewModel> getServiceByDateAndType(
+          @RequestParam(required = false) LocalDate date,
+          @RequestParam(required = false) ServiceType type) {
+    List<ChurchService> foundChurchServices;
+    if(date == null) {
+      date = getDateOfFirstSundayFromNow();
+      foundChurchServices = servicesRepository.findEntityByDateAndType(date, type);
+      List<ChurchService> otherChurchServicesBeforeFirstSunday = servicesRepository.findEntityBetweenDates(LocalDate.now(), date);
+      foundChurchServices.addAll(otherChurchServicesBeforeFirstSunday);
+    } else {
+      foundChurchServices = servicesRepository.findEntityByDateAndType(date, type);
+    }
+    foundChurchServices.sort((ChurchService c1, ChurchService c2) -> c1.getServiceDate().compareTo(c2.getServiceDate()));
+    return convertListOfServicesToListOfServicesViewModels(foundChurchServices);
+  }
+//    humans.sort(
+//      (Human h1, Human h2) -> h1.getName().compareTo(h2.getName()));
+  private LocalDate getDateOfFirstSundayFromNow() {
+    LocalDate date = LocalDate.now();
+    if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+      return date;
+    }
+    LocalDate firstSundayFromNow = date.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+    return firstSundayFromNow;
+  }
+
+
+  @GetMapping("/list")
   @PreAuthorize("hasAuthority('ViewService')")
   public List<ServiceFullViewModel> getAllServices() {
 

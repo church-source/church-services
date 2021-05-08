@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.churchsource.churchservices.services.songs.SongItemBackingForm;
 
 import javax.persistence.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.Set;
+import java.util.HashSet;
 
 @Getter
 @Setter
@@ -17,7 +19,7 @@ public class ServiceBackingForm {
 
   private Long id;
 
-  private Date serviceDate;
+  private LocalDate serviceDate;
 
   @Enumerated(EnumType.STRING)
   private ServiceType serviceType;
@@ -25,7 +27,7 @@ public class ServiceBackingForm {
   private Set<SongItemBackingForm> songItems = new HashSet<>();
 
   @Builder(builderMethodName = "aServiceBackingForm")
-  public ServiceBackingForm(Long id, Date serviceDate, ServiceType serviceType, Set<SongItemBackingForm> songItems) {
+  public ServiceBackingForm(Long id, LocalDate serviceDate, ServiceType serviceType, Set<SongItemBackingForm> songItems) {
     this.id=id;
     this.serviceDate = serviceDate;
     this.serviceType = serviceType;
