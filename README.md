@@ -1,11 +1,11 @@
 
-# church-people
+# church-services
 **Build Status:**
 [![Build Status](https://travis-ci.com/church-source/church-services.svg?branch=master)](https://travis-ci.com/church-source/church-services)
 **Code Coverage Status:**
 [![codecov](https://codecov.io/gh/church-source/church-services/branch/master/graph/badge.svg)](https://codecov.io/gh/church-source/church-services)
 
-A church people API
+A church services API
 
 ### Local Dev Environment
 To build: `gradlew build`
