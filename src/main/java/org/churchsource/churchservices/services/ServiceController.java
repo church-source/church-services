@@ -60,8 +60,7 @@ public class ServiceController {
     foundChurchServices.sort((ChurchService c1, ChurchService c2) -> c1.getServiceDate().compareTo(c2.getServiceDate()));
     return convertListOfServicesToListOfServicesViewModels(foundChurchServices);
   }
-//    humans.sort(
-//      (Human h1, Human h2) -> h1.getName().compareTo(h2.getName()));
+
   private LocalDate getDateOfFirstSundayFromNow() {
     LocalDate date = LocalDate.now();
     if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
