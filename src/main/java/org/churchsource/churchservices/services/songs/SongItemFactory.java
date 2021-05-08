@@ -1,4 +1,4 @@
-package org.churchsource.churchservices.services;
+package org.churchsource.churchservices.services.songs;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +9,13 @@ public class SongItemFactory {
 
     public SongItem createSongItemEntity(SongItemBackingForm pbForm) {
         SongItem songItem = new SongItem();
-        BeanUtils.copyProperties(pbForm, songItem, "deleted, service");
+        BeanUtils.copyProperties(pbForm, songItem);
         return songItem;
     }
 
     public SongItemFullViewModel createSongItemFullViewModelFromEntity(SongItem songItem) {
         SongItemFullViewModel songItemFullViewModel = new SongItemFullViewModel();
-        BeanUtils.copyProperties(songItem, songItemFullViewModel, "deleted, created, modified, service");
+        BeanUtils.copyProperties(songItem, songItemFullViewModel);
         return songItemFullViewModel;
     }
 }

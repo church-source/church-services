@@ -3,6 +3,7 @@ package org.churchsource.churchservices.services;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.churchsource.churchservices.model.type.ServiceType;
+import org.churchsource.churchservices.services.songs.SongItemFullViewModel;
 import org.churchsource.churchservices.viewmodel.BaseViewModel;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

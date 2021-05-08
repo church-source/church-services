@@ -1,4 +1,4 @@
-package org.churchsource.churchservices.services;
+package org.churchsource.churchservices.services.songs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
@@ -11,10 +11,10 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
-public class SongItemFullViewModel extends ChurchServiceEntity<Long> implements Serializable {
+public class SongItemFullViewModel implements Serializable {
 
   private static final long serialVersionUID = -3479479691039681608L;
 
@@ -26,9 +26,7 @@ public class SongItemFullViewModel extends ChurchServiceEntity<Long> implements 
   private int songOrder;
 
   @Builder(builderMethodName = "aSongItem")
-  public SongItemFullViewModel(Long id, Date created, Date modified/*, ServiceFullViewModel service*/, String songCode, int songOrder, Boolean deleted) {
-    super(id, created, modified, deleted);
-    //this.service = service;
+  public SongItemFullViewModel(String songCode, int songOrder, Boolean deleted) {
     this.songCode = songCode;
     this.songOrder = songOrder;
   }

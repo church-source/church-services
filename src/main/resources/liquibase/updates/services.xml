@@ -13,7 +13,7 @@
           <column name="deleted" type="TINYINT(1)" defaultValue="0">
                 <constraints nullable="0" />
           </column>
-          <column name="serviceDate" type="DATETIME">
+          <column name="serviceDate" type="DATE">
             <constraints nullable="false" />
           </column>
           <column name="serviceType" type="varchar(20)">
@@ -27,6 +27,14 @@
         <sql dbms="mysql">
             ALTER TABLE Service CHANGE modified modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
         </sql>
+    </changeSet>
+
+    <changeSet id="20210503-0700" author="rowanpi">
+        <addUniqueConstraint
+                columnNames="serviceDate, serviceType"
+                constraintName="uq_serviceDate_type"
+                tableName="Service"
+        />
     </changeSet>
 
 

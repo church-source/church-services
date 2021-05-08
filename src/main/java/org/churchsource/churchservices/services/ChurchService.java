@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import lombok.*;
 
+import org.churchsource.churchservices.services.songs.SongItem;
 import org.hibernate.annotations.Where;
 
 import org.churchsource.churchservices.model.ChurchServiceEntity;
@@ -39,7 +40,6 @@ public class ChurchService extends ChurchServiceEntity<Long> implements Serializ
   private ServiceType serviceType;
 
   @OneToMany(mappedBy = "service", fetch=FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
-  @Where(clause = "deleted = 0")
   @JsonManagedReference
   private Set<SongItem> songItems = new HashSet<SongItem>();
 

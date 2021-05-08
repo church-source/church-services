@@ -76,7 +76,7 @@ public class ServiceController {
   @RequestMapping(value = "{id}", method = RequestMethod.PUT)
   //TODO temp fix for cross origin. this must be fixed later
   @CrossOrigin
-  @PreAuthorize("hasAuthority('EditServices')")
+  @PreAuthorize("hasAuthority('EditService')")
   public ServiceFullViewModel updatePerson(@PathVariable Long id, @RequestBody ServiceBackingForm form) throws Exception {
     //TODO add validator to check if all fields are valid
     if(id == null || form == null) {

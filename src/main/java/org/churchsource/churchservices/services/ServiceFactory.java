@@ -1,5 +1,9 @@
 package org.churchsource.churchservices.services;
 
+import org.churchsource.churchservices.services.songs.SongItem;
+import org.churchsource.churchservices.services.songs.SongItemBackingForm;
+import org.churchsource.churchservices.services.songs.SongItemFactory;
+import org.churchsource.churchservices.services.songs.SongItemFullViewModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
