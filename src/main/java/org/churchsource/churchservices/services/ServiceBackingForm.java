@@ -7,8 +7,8 @@ import org.churchsource.churchservices.services.songs.SongItemBackingForm;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -24,10 +24,10 @@ public class ServiceBackingForm {
   @Enumerated(EnumType.STRING)
   private ServiceType serviceType;
 
-  private Set<SongItemBackingForm> songItems = new HashSet<>();
+  private List<SongItemBackingForm> songItems = new ArrayList<SongItemBackingForm>();
 
   @Builder(builderMethodName = "aServiceBackingForm")
-  public ServiceBackingForm(Long id, LocalDate serviceDate, ServiceType serviceType, Set<SongItemBackingForm> songItems) {
+  public ServiceBackingForm(Long id, LocalDate serviceDate, ServiceType serviceType, List<SongItemBackingForm> songItems) {
     this.id=id;
     this.serviceDate = serviceDate;
     this.serviceType = serviceType;

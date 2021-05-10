@@ -6,11 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.churchsource.churchservices.model.ChurchServiceEntity;
 import org.churchsource.churchservices.services.ChurchService;
+import org.churchsource.churchservices.services.ServiceNamedQueryConstants;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
+/*
+@NamedQueries({
+
+})
+*/
 
 @Getter
 @Setter

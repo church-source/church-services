@@ -19,4 +19,13 @@ public class ServiceNamedQueryConstants {
   public static final String QUERY_GET_SERVICES_BETWEEN_DATES = "SELECT s FROM ChurchService s WHERE " +
           "(:includeDeleted = TRUE OR s.deleted = false) " +
           "AND s.serviceDate >= :startDate AND s.serviceDate < :endDate";
+
+  public static final String NAME_GET_LAST_SERVICE_CHOSEN = "ChurchService.getLastServiceChosen";
+  public static final String QUERY_GET_LAST_SERVICE_CHOSEN = "SELECT serv FROM ChurchService serv " +
+          "INNER JOIN SongItem s ON (serv.id = s.service) " +
+          "WHERE " +
+          " (:includeDeleted = TRUE OR serv.deleted = false) " +
+          "  AND serv.serviceDate < :date" +
+          "  AND s.songCode = :songCode " +
+          " ORDER by serv.serviceDate";
 }

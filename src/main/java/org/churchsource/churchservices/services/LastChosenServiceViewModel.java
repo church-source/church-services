@@ -5,22 +5,19 @@ import lombok.*;
 import org.churchsource.churchservices.model.type.ServiceType;
 import org.churchsource.churchservices.services.songs.SongItemFullViewModel;
 import org.churchsource.churchservices.viewmodel.BaseViewModel;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class ServiceFullViewModel extends BaseViewModel<Long> implements Serializable {
+public class LastChosenServiceViewModel extends BaseViewModel<Long> implements Serializable {
 
   private static final long serialVersionUID = -3479479691039681608L;
 
@@ -30,15 +27,11 @@ public class ServiceFullViewModel extends BaseViewModel<Long> implements Seriali
   @Enumerated(EnumType.STRING)
   private ServiceType serviceType;
 
-  //@JsonManagedReference
-  private List<SongItemFullViewModel> songItems = new ArrayList<SongItemFullViewModel>();
-
   @Builder(builderMethodName = "aServiceFullViewModel")
-  public ServiceFullViewModel(Long id, LocalDate serviceDate, ServiceType serviceType, List<SongItemFullViewModel> songItems) {
+  public LastChosenServiceViewModel(Long id, LocalDate serviceDate, ServiceType serviceType) {
     super(id);
     this.serviceDate = serviceDate;
     this.serviceType = serviceType;
-    this.songItems = songItems;
   }
 }
 

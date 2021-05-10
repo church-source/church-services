@@ -4,13 +4,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.persistence.*;
 
 import lombok.*;
 
 import org.churchsource.churchservices.services.songs.SongItem;
+import org.churchsource.churchservices.services.songs.SongNamedQueryConstants;
 import org.hibernate.annotations.Where;
 
 import org.churchsource.churchservices.model.ChurchServiceEntity;
@@ -26,6 +29,8 @@ import org.churchsource.churchservices.model.type.ServiceType;
         query = ServiceNamedQueryConstants.QUERY_GET_SERVICES_BY_DATE_AND_TYPE),
     @NamedQuery(name = ServiceNamedQueryConstants.NAME_GET_SERVICES_BETWEEN_DATES,
         query = ServiceNamedQueryConstants.QUERY_GET_SERVICES_BETWEEN_DATES),
+    @NamedQuery(name = ServiceNamedQueryConstants.NAME_GET_LAST_SERVICE_CHOSEN,
+        query = ServiceNamedQueryConstants.QUERY_GET_LAST_SERVICE_CHOSEN)
 })
 
 @Getter
@@ -46,11 +51,12 @@ public class ChurchService extends ChurchServiceEntity<Long> implements Serializ
 
   @OneToMany(mappedBy = "service", fetch=FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
   @JsonManagedReference
-  private Set<SongItem> songItems = new HashSet<SongItem>();
+  @org.hibernate.annotations.OrderBy(clause = "songOrder asc")
+  private List<SongItem> songItems = new ArrayList<SongItem>();
 
   @Builder(builderMethodName = "aService")
   public ChurchService(Long id, Date created, Date modified, Boolean deleted, LocalDate serviceDate,
-                       ServiceType serviceType, Set<SongItem> songItems) {
+                       ServiceType serviceType, List<SongItem> songItems) {
     super(id, created, modified, deleted);
     this.serviceDate = serviceDate;
     this.serviceType = serviceType;

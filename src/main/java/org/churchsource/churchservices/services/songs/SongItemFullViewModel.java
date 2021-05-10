@@ -3,6 +3,7 @@ package org.churchsource.churchservices.services.songs;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.churchsource.churchservices.model.ChurchServiceEntity;
+import org.churchsource.churchservices.services.LastChosenServiceViewModel;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,9 +19,8 @@ public class SongItemFullViewModel implements Serializable {
 
   private static final long serialVersionUID = -3479479691039681608L;
 
-/*  @JsonBackReference
-  private ServiceFullViewModel service;
-*/
+  private LastChosenServiceViewModel lastChosenService;
+
   private String songCode;
 
   private int songOrder;

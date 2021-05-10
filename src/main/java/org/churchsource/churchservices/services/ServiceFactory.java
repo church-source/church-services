@@ -8,8 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ServiceFactory {
@@ -24,8 +24,8 @@ public class ServiceFactory {
     public ChurchService createServiceEntity(ServiceBackingForm pbForm) {
         ChurchService aChurchService = new ChurchService();
         BeanUtils.copyProperties(pbForm, aChurchService, "deleted, songItems");
-        Set<SongItemBackingForm> songItemBackingForms = pbForm.getSongItems();
-        Set<SongItem> songItems = new HashSet<SongItem>();
+        List<SongItemBackingForm> songItemBackingForms = pbForm.getSongItems();
+        List<SongItem> songItems = new ArrayList<SongItem>();
         for(SongItemBackingForm song : songItemBackingForms) {
             SongItem aSongItem = songItemFactory.createSongItemEntity(song);
             aSongItem.setService(aChurchService);
@@ -38,8 +38,8 @@ public class ServiceFactory {
     public ServiceFullViewModel createServiceFullViewModelFromEntity(ChurchService churchService) {
         ServiceFullViewModel serviceFullViewModel = new ServiceFullViewModel();
         BeanUtils.copyProperties(churchService, serviceFullViewModel, "deleted, created, modified");
-        Set<SongItem> songItems = churchService.getSongItems();
-        Set<SongItemFullViewModel> songItemsFullViewModels = new HashSet<SongItemFullViewModel>();//serviceFullViewModel.getSongItems();
+        List<SongItem> songItems = churchService.getSongItems();
+        List<SongItemFullViewModel> songItemsFullViewModels = new ArrayList<SongItemFullViewModel>();//serviceFullViewModel.getSongItems();
         for(SongItem song : songItems) {
             //System.out.println("Got here");
             songItemsFullViewModels.add(songItemFactory.createSongItemFullViewModelFromEntity(song));

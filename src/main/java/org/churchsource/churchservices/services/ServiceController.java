@@ -43,6 +43,17 @@ public class ServiceController {
     }
   }
 
+  @GetMapping("lastchosendateofSong/{songCode}")
+  @PreAuthorize("hasAuthority('ViewService')")
+  public ServiceFullViewModel getService(@PathVariable String songCode) {
+    ChurchService foundChurchService = servicesRepository.getLastServiceChosen(songCode, LocalDate.now());
+    if(foundChurchService != null) {
+      return serviceFactory.createServiceFullViewModelFromEntity(foundChurchService);
+    } else {
+      return null;
+    }
+  }
+
   @GetMapping
   @PreAuthorize("hasAuthority('ViewService')")
   public List<ServiceFullViewModel> getServiceByDateAndType(

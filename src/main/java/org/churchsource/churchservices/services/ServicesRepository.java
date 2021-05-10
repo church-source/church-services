@@ -8,6 +8,7 @@ import javax.persistence.NonUniqueResultException;
 
 import org.churchsource.churchservices.model.type.ServiceType;
 import org.churchsource.churchservices.repository.AbstractRepository;
+import org.churchsource.churchservices.services.songs.SongNamedQueryConstants;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,6 @@ public class ServicesRepository extends AbstractRepository<ChurchService> {
             .getResultList();
   }
 
-
   public ChurchService findServiceById(Long id) throws NoResultException {
     return entityManager.createNamedQuery(ServiceNamedQueryConstants.NAME_FIND_SERVICE_BY_ID, ChurchService.class)
         .setParameter("id", id)
@@ -55,5 +55,18 @@ public class ServicesRepository extends AbstractRepository<ChurchService> {
     ChurchService churchServiceToDelete = findServiceById(serviceId);
     churchServiceToDelete.setDeleted(true);
     update(churchServiceToDelete);
+  }
+
+  public ChurchService getLastServiceChosen(String songCode, LocalDate date) {
+    try {
+      return entityManager.createNamedQuery(ServiceNamedQueryConstants.NAME_GET_LAST_SERVICE_CHOSEN, ChurchService.class)
+              .setParameter("includeDeleted", false)
+              .setParameter("songCode", songCode)
+              .setParameter("date", date)
+              .setMaxResults(1)
+              .getSingleResult();
+    } catch (NoResultException nre) {
+      return null;
+    }
   }
 }
