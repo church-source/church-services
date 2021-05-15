@@ -49,7 +49,7 @@ public class ChurchService extends ChurchServiceEntity<Long> implements Serializ
   @Enumerated(EnumType.STRING)
   private ServiceType serviceType;
 
-  @OneToMany(mappedBy = "service", fetch=FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+  @OneToMany(mappedBy = "service", fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonManagedReference
   @org.hibernate.annotations.OrderBy(clause = "songOrder asc")
   private List<SongItem> songItems = new ArrayList<SongItem>();
