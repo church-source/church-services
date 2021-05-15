@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class ServiceFactory {
 
-
     @Autowired
     private ServicesRepository servicesRepository;
 
@@ -41,10 +40,15 @@ public class ServiceFactory {
         List<SongItem> songItems = churchService.getSongItems();
         List<SongItemFullViewModel> songItemsFullViewModels = new ArrayList<SongItemFullViewModel>();//serviceFullViewModel.getSongItems();
         for(SongItem song : songItems) {
-            //System.out.println("Got here");
-            songItemsFullViewModels.add(songItemFactory.createSongItemFullViewModelFromEntity(song));
+            songItemsFullViewModels.add(songItemFactory.createSongItemFullViewModelFromEntity(song, churchService.getServiceDate()));
         }
         serviceFullViewModel.setSongItems(songItemsFullViewModels);
+        return serviceFullViewModel;
+    }
+
+    public LastChosenServiceViewModel createLastChosenServiceViewModelFromEntity(ChurchService churchService) {
+        LastChosenServiceViewModel serviceFullViewModel = new LastChosenServiceViewModel();
+        BeanUtils.copyProperties(churchService, serviceFullViewModel, "deleted, created, modified, songItems");
         return serviceFullViewModel;
     }
 }
