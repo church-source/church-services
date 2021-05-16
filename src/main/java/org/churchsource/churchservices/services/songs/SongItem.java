@@ -11,11 +11,11 @@ import org.churchsource.churchservices.services.ServiceNamedQueryConstants;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/*
 @NamedQueries({
-
+        @NamedQuery(name = SongNamedQueryConstants.NAME_COUNT_SERVICES_WHERE_SONG_WAS_CHOSEN,
+                query = SongNamedQueryConstants.QUERY_COUNT_SERVICES_WHERE_SONG_WAS_CHOSEN),
 })
-*/
+
 
 @Getter
 @Setter

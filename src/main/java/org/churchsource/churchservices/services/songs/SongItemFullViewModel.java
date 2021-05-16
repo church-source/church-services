@@ -21,6 +21,14 @@ public class SongItemFullViewModel implements Serializable {
 
   private LastChosenServiceViewModel lastChosenService;
 
+  private Integer timesChosenInLastMonth;
+
+  private Integer timesChosenInLastThreeMonths;
+
+  private Integer timesChosenInLastYear;
+
+  private Integer timesChosenInTotal;
+
   private String songCode;
 
   private int songOrder;

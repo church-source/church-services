@@ -13,8 +13,6 @@ import javax.persistence.*;
 import lombok.*;
 
 import org.churchsource.churchservices.services.songs.SongItem;
-import org.churchsource.churchservices.services.songs.SongNamedQueryConstants;
-import org.hibernate.annotations.Where;
 
 import org.churchsource.churchservices.model.ChurchServiceEntity;
 import org.churchsource.churchservices.model.type.ServiceType;

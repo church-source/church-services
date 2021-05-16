@@ -19,6 +19,9 @@ public class SongItemFactory {
     @Autowired
     private ServiceFactory serviceFactory;
 
+    @Autowired
+    private SongRepository songRepository;
+
     public SongItem createSongItemEntity(SongItemBackingForm pbForm) {
         SongItem songItem = new SongItem();
         BeanUtils.copyProperties(pbForm, songItem);
@@ -32,6 +35,14 @@ public class SongItemFactory {
         if(lastChosenService != null) {
             songItemFullViewModel.setLastChosenService(serviceFactory.createLastChosenServiceViewModelFromEntity(lastChosenService));
         }
+        Integer numberOfTimesChosenInLastMonth = songRepository.getNumberOfTimesChosen(songItem.getSongCode(), serviceDate.minusMonths(1) ,serviceDate);
+        songItemFullViewModel.setTimesChosenInLastMonth(numberOfTimesChosenInLastMonth);
+        Integer numberOfTimesChosenInLastThreeMonths = songRepository.getNumberOfTimesChosen(songItem.getSongCode(), serviceDate.minusMonths(3) ,serviceDate);
+        songItemFullViewModel.setTimesChosenInLastThreeMonths(numberOfTimesChosenInLastThreeMonths);
+        Integer numberOfTimesChosenInLastYear = songRepository.getNumberOfTimesChosen(songItem.getSongCode(), serviceDate.minusYears(1) ,serviceDate);
+        songItemFullViewModel.setTimesChosenInLastYear(numberOfTimesChosenInLastYear);
+        Integer numberOfTimesChosenInTotal = songRepository.getNumberOfTimesChosen(songItem.getSongCode(), LocalDate.ofEpochDay(0),serviceDate);
+        songItemFullViewModel.setTimesChosenInTotal(numberOfTimesChosenInTotal);
         return songItemFullViewModel;
     }
 }
