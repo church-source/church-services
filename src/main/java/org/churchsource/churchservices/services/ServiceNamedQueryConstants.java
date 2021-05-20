@@ -27,5 +27,5 @@ public class ServiceNamedQueryConstants {
           " (:includeDeleted = TRUE OR serv.deleted = false) " +
           "  AND serv.serviceDate < :date" +
           "  AND s.songCode = :songCode " +
-          " ORDER by serv.serviceDate";
+          " ORDER by serv.serviceDate desc";
 }
