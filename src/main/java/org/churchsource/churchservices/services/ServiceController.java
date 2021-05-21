@@ -2,9 +2,12 @@ package org.churchsource.churchservices.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.churchsource.churchservices.model.type.ServiceType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -57,7 +60,7 @@ public class ServiceController {
   @GetMapping
   @PreAuthorize("hasAuthority('ViewService')")
   public List<ServiceFullViewModel> getServiceByDateAndType(
-          @RequestParam(required = false) LocalDate date,
+          @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
           @RequestParam(required = false) ServiceType type) {
     List<ChurchService> foundChurchServices;
     if(date == null) {
