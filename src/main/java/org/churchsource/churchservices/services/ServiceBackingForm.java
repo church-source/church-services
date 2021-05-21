@@ -3,6 +3,8 @@ package org.churchsource.churchservices.services;
 import lombok.*;
 import org.churchsource.churchservices.model.type.ServiceType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.churchsource.churchservices.services.songs.SongItemBackingForm;
 
 import javax.persistence.*;
@@ -19,6 +21,7 @@ public class ServiceBackingForm {
 
   private Long id;
 
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDate serviceDate;
 
   @Enumerated(EnumType.STRING)
