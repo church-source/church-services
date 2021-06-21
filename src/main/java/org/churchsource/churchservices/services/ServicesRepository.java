@@ -9,8 +9,10 @@ import javax.persistence.NonUniqueResultException;
 import org.churchsource.churchservices.model.type.ServiceType;
 import org.churchsource.churchservices.repository.AbstractRepository;
 import org.churchsource.churchservices.services.songs.SongNamedQueryConstants;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Repository
 @Transactional
@@ -69,4 +71,5 @@ public class ServicesRepository extends AbstractRepository<ChurchService> {
       return null;
     }
   }
+
 }
