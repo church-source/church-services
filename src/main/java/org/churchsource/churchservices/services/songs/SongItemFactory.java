@@ -45,4 +45,10 @@ public class SongItemFactory {
         songItemFullViewModel.setTimesChosenInTotal(numberOfTimesChosenInTotal);
         return songItemFullViewModel;
     }
+
+    public SongItemFullViewModel createSongItemListViewModelFromEntity(SongItem songItem) {
+        SongItemFullViewModel songItemFullViewModel = new SongItemFullViewModel();
+        BeanUtils.copyProperties(songItem, songItemFullViewModel);
+        return songItemFullViewModel;
+    }
 }

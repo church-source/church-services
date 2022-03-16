@@ -95,7 +95,7 @@ public class ServiceController {
 
   private List<ServiceFullViewModel> convertListOfServicesToListOfServicesViewModels(List<ChurchService> churchServices) {
     List<ServiceFullViewModel> serviceViewModels = churchServices.stream()
-            .map(churchService -> serviceFactory.createServiceFullViewModelFromEntity(churchService))
+            .map(churchService -> serviceFactory.createServiceListViewModelFromEntity(churchService))
             .collect(Collectors.toList());
     return serviceViewModels;
   }

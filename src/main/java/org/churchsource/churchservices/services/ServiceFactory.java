@@ -34,6 +34,18 @@ public class ServiceFactory {
         return aChurchService;
     }
 
+    public ServiceFullViewModel createServiceListViewModelFromEntity(ChurchService churchService) {
+        ServiceFullViewModel serviceFullViewModel = new ServiceFullViewModel();
+        BeanUtils.copyProperties(churchService, serviceFullViewModel, "deleted, created, modified");
+        List<SongItem> songItems = churchService.getSongItems();
+        List<SongItemFullViewModel> songItemsFullViewModels = new ArrayList<SongItemFullViewModel>();//serviceFullViewModel.getSongItems();
+        for(SongItem song : songItems) {
+            songItemsFullViewModels.add(songItemFactory.createSongItemListViewModelFromEntity(song));
+        }
+        serviceFullViewModel.setSongItems(songItemsFullViewModels);
+        return serviceFullViewModel;
+    }
+
     public ServiceFullViewModel createServiceFullViewModelFromEntity(ChurchService churchService) {
         ServiceFullViewModel serviceFullViewModel = new ServiceFullViewModel();
         BeanUtils.copyProperties(churchService, serviceFullViewModel, "deleted, created, modified");
