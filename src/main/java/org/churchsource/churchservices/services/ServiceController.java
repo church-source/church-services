@@ -135,7 +135,7 @@ public class ServiceController {
     if(id == null || form == null) {
       throw new Exception ("Invalid Request"); // TODO to be replaced with validator
     }
-    if(form.getId() != null && id != form.getId()) {
+    if(form.getId() != null && (!id.equals(form.getId()))) {
       throw new Exception ("If ID is in Path and message body they must be equal. Path ID: " + id + "   and Form ID: "+ form.getId()); // TODO to be replaced with validator
     }
     form.setId(id);
