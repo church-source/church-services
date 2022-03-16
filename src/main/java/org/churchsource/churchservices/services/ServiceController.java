@@ -72,7 +72,7 @@ public class ServiceController {
       foundChurchServices = servicesRepository.findEntityByDateAndType(date, type);
     }
     foundChurchServices.sort((ChurchService c1, ChurchService c2) -> c1.getServiceDate().compareTo(c2.getServiceDate()));
-    return convertListOfServicesToListOfServicesViewModels(foundChurchServices);
+    return convertListOfServicesToListOfServicesFullViewModels(foundChurchServices);
   }
 
   private LocalDate getDateOfFirstSundayFromNow() {
@@ -87,15 +87,22 @@ public class ServiceController {
 
   @GetMapping("/list")
   @PreAuthorize("hasAuthority('ViewService')")
-  public List<ServiceFullViewModel> getAllServices() {
+  public List<ServiceListViewModel> getAllServices() {
 
     List<ChurchService> churchServices = servicesRepository.getAllServices();
-    return convertListOfServicesToListOfServicesViewModels(churchServices);
+    return convertListOfServicesToListOfServicesListViewModels(churchServices);
   }
 
-  private List<ServiceFullViewModel> convertListOfServicesToListOfServicesViewModels(List<ChurchService> churchServices) {
-    List<ServiceFullViewModel> serviceViewModels = churchServices.stream()
+  private List<ServiceListViewModel> convertListOfServicesToListOfServicesListViewModels(List<ChurchService> churchServices) {
+    List<ServiceListViewModel> serviceViewModels = churchServices.stream()
             .map(churchService -> serviceFactory.createServiceListViewModelFromEntity(churchService))
+            .collect(Collectors.toList());
+    return serviceViewModels;
+  }
+
+  private List<ServiceFullViewModel> convertListOfServicesToListOfServicesFullViewModels(List<ChurchService> churchServices) {
+    List<ServiceFullViewModel> serviceViewModels = churchServices.stream()
+            .map(churchService -> serviceFactory.createServiceFullViewModelFromEntity(churchService))
             .collect(Collectors.toList());
     return serviceViewModels;
   }

@@ -1,9 +1,6 @@
 package org.churchsource.churchservices.services;
 
-import org.churchsource.churchservices.services.songs.SongItem;
-import org.churchsource.churchservices.services.songs.SongItemBackingForm;
-import org.churchsource.churchservices.services.songs.SongItemFactory;
-import org.churchsource.churchservices.services.songs.SongItemFullViewModel;
+import org.churchsource.churchservices.services.songs.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,16 +31,16 @@ public class ServiceFactory {
         return aChurchService;
     }
 
-    public ServiceFullViewModel createServiceListViewModelFromEntity(ChurchService churchService) {
-        ServiceFullViewModel serviceFullViewModel = new ServiceFullViewModel();
-        BeanUtils.copyProperties(churchService, serviceFullViewModel, "deleted, created, modified");
+    public ServiceListViewModel createServiceListViewModelFromEntity(ChurchService churchService) {
+        ServiceListViewModel serviceListViewModel = new ServiceListViewModel();
+        BeanUtils.copyProperties(churchService, serviceListViewModel, "deleted, created, modified");
         List<SongItem> songItems = churchService.getSongItems();
-        List<SongItemFullViewModel> songItemsFullViewModels = new ArrayList<SongItemFullViewModel>();//serviceFullViewModel.getSongItems();
+        List<SongItemListViewModel> songItemsListViewModels = new ArrayList<SongItemListViewModel>();//serviceFullViewModel.getSongItems();
         for(SongItem song : songItems) {
-            songItemsFullViewModels.add(songItemFactory.createSongItemListViewModelFromEntity(song));
+            songItemsListViewModels.add(songItemFactory.createSongItemListViewModelFromEntity(song));
         }
-        serviceFullViewModel.setSongItems(songItemsFullViewModels);
-        return serviceFullViewModel;
+        serviceListViewModel.setSongItems(songItemsListViewModels);
+        return serviceListViewModel;
     }
 
     public ServiceFullViewModel createServiceFullViewModelFromEntity(ChurchService churchService) {

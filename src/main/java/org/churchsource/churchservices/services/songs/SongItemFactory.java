@@ -46,9 +46,9 @@ public class SongItemFactory {
         return songItemFullViewModel;
     }
 
-    public SongItemFullViewModel createSongItemListViewModelFromEntity(SongItem songItem) {
-        SongItemFullViewModel songItemFullViewModel = new SongItemFullViewModel();
-        BeanUtils.copyProperties(songItem, songItemFullViewModel);
-        return songItemFullViewModel;
+    public SongItemListViewModel createSongItemListViewModelFromEntity(SongItem songItem) {
+        SongItemListViewModel songItemListViewModel = new SongItemListViewModel();
+        BeanUtils.copyProperties(songItem, songItemListViewModel);
+        return songItemListViewModel;
     }
 }
