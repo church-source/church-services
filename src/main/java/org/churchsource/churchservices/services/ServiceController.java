@@ -136,7 +136,7 @@ public class ServiceController {
       throw new Exception ("Invalid Request"); // TODO to be replaced with validator
     }
     if(form.getId() != null && id != form.getId()) {
-      throw new Exception ("If ID is in Path and message body they must be equal. "); // TODO to be replaced with validator
+      throw new Exception ("If ID is in Path and message body they must be equal. Path ID: " + id + "   and Form ID: "+ form.getId()); // TODO to be replaced with validator
     }
     form.setId(id);
     ChurchService updatedChurchService = servicesRepository.updateService(serviceFactory.createServiceEntity(form));
